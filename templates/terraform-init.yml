@@ -1,0 +1,18 @@
+parameters:
+- name: environment
+  type: string
+- name: workingDirectory
+  type: string
+
+steps:
+- task: TerraformTask@5
+  displayName: Terraform Init
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: ${{ parameters.workingDirectory }}
+    backendServiceArm: 'azure-iac-connection'
+    backendAzureRmResourceGroupName: 'rg-surendra'
+    backendAzureRmStorageAccountName: 'storagetodoapp'
+    backendAzureRmContainerName: 'containertodoapp'
+    backendAzureRmKey: 'todoapp-${{ parameters.environment }}.tfstate'

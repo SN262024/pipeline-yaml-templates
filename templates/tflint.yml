@@ -1,0 +1,10 @@
+parameters:
+- name: workingDirectory
+  type: string
+
+steps:
+- script: |
+    tflint --init
+    tflint
+  displayName: Run TFLint
+  workingDirectory: ${{ parameters.workingDirectory }}
