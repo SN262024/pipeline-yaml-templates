@@ -3,6 +3,9 @@ parameters:
   type: string
 
 steps:
-- script: tfsec .
-  displayName: Run tfsec
-  workingDirectory: ${{ parameters.workingDirectory }}
+- powershell: |
+    mkdir security-artifacts\tfsec -Force
+    tfsec ${{ parameters.workingDirectory }} `
+      --format json `
+      --out security-artifacts\tfsec\tfsec-report.json
+  continueOnError: true

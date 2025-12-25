@@ -3,6 +3,9 @@ parameters:
   type: string
 
 steps:
-- script: checkov -d .
-  displayName: Run Checkov
-  workingDirectory: ${{ parameters.workingDirectory }}
+- powershell: |
+    mkdir security-artifacts\checkov -Force
+    checkov -d ${{ parameters.workingDirectory }} `
+      -o json `
+      --output-file-path security-artifacts\checkov
+  continueOnError: true

@@ -59,6 +59,14 @@ stages:
       parameters:
         workingDirectory: $(tf_working_dir)
 
+    - task: PublishPipelineArtifact@1
+      displayName: Publish Security Scan Reports
+      inputs:
+        targetPath: '$(System.DefaultWorkingDirectory)/security-artifacts'
+        artifact: 'security-reports'
+        publishLocation: 'pipeline'
+
+
 # ---------------- DEPLOY ----------------
 - stage: Deploy
   dependsOn: Scanning
