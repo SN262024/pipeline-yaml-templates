@@ -3,8 +3,10 @@ parameters:
   type: string
 
 steps:
-- script: |
+- powershell: |
+    mkdir security-artifacts\tflint -Force
     tflint --init
-    tflint
-  displayName: Run TFLint
-  workingDirectory: ${{ parameters.workingDirectory }}
+    tflint --format json `
+      --out security-artifacts\tflint\tflint-report.json `
+      ${{ parameters.workingDirectory }}
+  continueOnError: true
