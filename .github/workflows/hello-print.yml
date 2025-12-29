@@ -1,0 +1,11 @@
+name: Hello Print Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hello:
+    runs-on: self-hosted
+    steps:
+      - name: Print a greeting
+        run: echo "hello world, This is my first workflow from GitHub Actions"
